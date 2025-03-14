@@ -4,13 +4,13 @@ import swaggerJSDoc from "swagger-jsdoc";
 const swaggerDefinition = {
   openapi: "3.0.0",
   info: {
-    title: "🚀 Next.js API - Swagger Docs",
+    title: "🚀 Tài liệu API - Dự án website GAS",
     version: "1.0.0",
-    description: "Tài liệu API của dự án Gas",
+    description: "Tài liệu API của dự án website GAS",
   },
   servers: [
     {
-      url: "http://localhost:3000/api",
+      url: "http://localhost:3000",
     },
   ],
 };
