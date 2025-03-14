@@ -1,7 +1,15 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  reactStrictMode: false,
+  async rewrites() {
+    return [
+      {
+        source: "/api-docs",
+        destination: "/api/swagger",
+      },
+    ];
+  },
 };
 
 export default nextConfig;
