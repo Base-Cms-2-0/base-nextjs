@@ -3,11 +3,11 @@ import { Roboto } from 'next/font/google'
 import StyledComponentsRegistry from '@/lib/client/antd.registry';
 import './globals.css'
 
-const roboto = Roboto({
-  weight: ['400', '700'],
-  subsets: ['latin', 'vietnamese'], 
-  display: 'swap', 
-});
+// const roboto = Roboto({
+//   weight: ['400', '700'],
+//   subsets: ['latin', 'vietnamese'], 
+//   display: 'swap', 
+// });
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={roboto.className}>
+      <body>
         <StyledComponentsRegistry>
           {children}
         </StyledComponentsRegistry>
