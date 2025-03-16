@@ -9,10 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hugeicons/core-free-icons": "^1.0.13",
+    "@hugeicons/react": "^1.0.4",
+    "@reduxjs/toolkit": "^2.6.1",
     "antd": "^5.24.3",
     "next": "15.2.2",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-redux": "^9.2.0",
+    "redux-persist": "^6.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -22,6 +27,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.2.2",
+    "sass": "^1.85.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

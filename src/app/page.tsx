@@ -1,9 +1,7 @@
-const Page = () => {
+'use client'
+
+export default function Page() {
   return (
-    <div>
       <div>Trang chủ</div>
-    </div>
   )
 }
-
-export default Page;
