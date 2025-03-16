@@ -1,13 +1,14 @@
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
-import StyledComponentsRegistry from '@/lib/client/antd.registry';
-import './globals.css'
+import { StoreProvider } from '@/redux/storeProvider'
+import StyledComponentsRegistry from '@/lib/client/antd.registry'
+import '@/assets/scss/main.scss'
 
 const roboto = Roboto({
   weight: ['400', '700'],
-  subsets: ['latin', 'vietnamese'], 
-  display: 'swap', 
-});
+  subsets: ['latin', 'vietnamese'],
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -20,12 +21,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <StoreProvider>
+    <html>
       <body className={roboto.className}>
         <StyledComponentsRegistry>
           {children}
         </StyledComponentsRegistry>
       </body>
     </html>
+    </StoreProvider>
   )
 }
