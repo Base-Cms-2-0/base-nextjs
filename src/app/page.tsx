@@ -1,7 +1,4 @@
-'use client'
-
-export default function Page() {
-  return (
-      <div>Trang chủ</div>
-  )
+import { redirect } from 'next/navigation'
+export default function Home() {
+  redirect('/vi')
 }

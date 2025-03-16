@@ -7,4 +7,4 @@ export const items: MenuItem[] = [
         key: 'dashboard',
         label: 'Bảng điều khiển',
     },
-];
+]

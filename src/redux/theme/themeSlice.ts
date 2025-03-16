@@ -6,7 +6,7 @@ export interface ThemeState {
 
 const initialState: ThemeState = {
     mytheme: 'light',
-};
+}
 
 const themeSlice = createSlice({
     name: 'mytheme',
@@ -16,7 +16,7 @@ const themeSlice = createSlice({
             state.mytheme = state.mytheme === 'light' ? 'dark' : 'light'
         },
     },
-});
+})
 
 export const { toggleTheme } = themeSlice.actions
 

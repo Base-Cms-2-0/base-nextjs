@@ -1,17 +1,20 @@
-'use client';
+'use client'
 
-import React, { useState } from 'react';
-import { Form, Input, Button, Checkbox } from 'antd';
-import { MailOutlined, LockOutlined } from '@ant-design/icons';
-import Image from 'next/image';
-import Link from 'next/link';
+import { Form, Input, Button } from 'antd'
+import { MailOutlined, LockOutlined } from '@ant-design/icons'
+import { useTranslations } from 'next-intl'
+import { useState } from 'react'
+import Link from 'next/link'
 
 export default function Login() {
-  const [loading, setLoading] = useState(false);
-  const onFinish = async (values: any) => {
-    setLoading(true);
+  const t = useTranslations('login') 
+  const [loading, setLoading] = useState(false)
 
-  };
+  const onFinish = async (values: any) => {
+    setLoading(true)
+    setLoading(false)
+  }
+
   return (
     <div className="flex min-h-screen font-roboto">
       <div className="hidden md:flex md:w-1/2 bg-white flex-col items-center justify-center p-8">
@@ -21,10 +24,10 @@ export default function Login() {
             alt="Golden Bee Logo"
             className="w-12 h-12"
           />
-          <h2 className="text-2xl font-bold text-gray-800">CỬA HÀNG GAS</h2>
+          <h2 className="text-2xl font-bold text-gray-800">{t('storeTitle')}</h2>
         </div>
         <p className="text-center text-gray-700 text-lg mb-8 max-w-lg">
-          Cung cấp các loại bình gas chất lượng cao, đảm bảo an toàn và chất lượng dịch vụ giao hàng nhanh chóng đến tận nhà.
+          {t('storeDescription')}
         </p>
         <img
           src="https://gasdonga.com.vn/images/1741078756097.png"
@@ -45,7 +48,7 @@ export default function Login() {
           <div className="w-full">
             <div className="text-center md:mt-0 mt-14 mb-6 md:mb-7">
               <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3 tracking-tight">
-                Đăng Nhập
+                {t('title')}
               </h1>
             </div>
             <Form
@@ -58,33 +61,33 @@ export default function Login() {
               onFinish={onFinish}
             >
               <Form.Item
-                label={<span className="text-gray-700 font-medium">Email</span>}
+                label={<span className="text-gray-700 font-medium">{t('emailLabel')}</span>}
                 name="email"
                 rules={[
-                  { required: true, message: 'Vui lòng nhập email của bạn!' },
-                  { type: 'email', message: 'Email không hợp lệ!' },
+                  { required: true, message: t('emailRequired') },
+                  { type: 'email', message: t('emailInvalid') },
                 ]}
                 className="mb-5"
               >
                 <Input
                   prefix={<MailOutlined className="text-gray-400" />}
-                  placeholder="Nhập email của bạn"
+                  placeholder={t('emailPlaceholder')}
                   className="rounded-md py-2 px-4 text-gray-700"
                 />
               </Form.Item>
 
               <Form.Item
-                label={<span className="text-gray-700 font-medium">Mật khẩu</span>}
+                label={<span className="text-gray-700 font-medium">{t('passwordLabel')}</span>}
                 name="password"
                 rules={[
-                  { required: true, message: 'Vui lòng nhập mật khẩu của bạn!' },
-                  { min: 8, message: 'Mật khẩu phải có ít nhất 8 ký tự!' },
+                  { required: true, message: t('passwordRequired') },
+                  { min: 8, message: t('passwordMinLength') },
                 ]}
                 className="mb-5"
               >
                 <Input.Password
                   prefix={<LockOutlined className="text-gray-400" />}
-                  placeholder="Nhập mật khẩu của bạn"
+                  placeholder={t('passwordPlaceholder')}
                   className="rounded-md py-2 px-4 text-gray-700"
                 />
               </Form.Item>
@@ -98,7 +101,7 @@ export default function Login() {
                         className="w-4 h-4 text-red-500 bg-white border accent-red-500"
                       />
                       <span className="text-gray-700 hover:text-red-500 transition-colors">
-                        Ghi nhớ đăng nhập
+                        {t('rememberMe')}
                       </span>
                     </label>
                   </Form.Item>
@@ -107,7 +110,7 @@ export default function Login() {
                     href="/auth/forgotPassword"
                     className="text-sm text-red-600 hover:text-red-800 transition-colors"
                   >
-                    Quên mật khẩu?
+                    {t('forgotPassword')}
                   </Link>
                 </div>
 
@@ -116,9 +119,9 @@ export default function Login() {
                   danger
                   htmlType="submit"
                   className="w-full h-12 font-medium tracking-wide"
-                  loading={loading} 
+                  loading={loading}
                 >
-                  Đăng Nhập
+                  {t('submitButton')}
                 </Button>
               </Form.Item>
             </Form>
@@ -126,5 +129,5 @@ export default function Login() {
         </div>
       </div>
     </div>
-  );
+  )
 }

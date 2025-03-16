@@ -5,5 +5,5 @@ export default function NotFound() {
     <div className="text-center">
       <h2>Not Found</h2>
     </div>
-  );
+  )
 }

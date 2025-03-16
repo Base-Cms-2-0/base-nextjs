@@ -9,13 +9,13 @@ interface RootState {
 
 const rootReducer = combineReducers({
   theme: themeReducer,
-});
+})
 
 const persistConfig: PersistConfig<RootState> = {
   key: 'root',
   storage,
   version: 1,
-};
+}
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
@@ -25,7 +25,7 @@ export const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: false,
     }),
-});
+})
 
 export const persistor = persistStore(store)
 

@@ -33,24 +33,24 @@ export default function MainBreadcrumb() {
                     result.push({
                         title: matchingItem.label,
                         path: currentPath
-                    });
+                    })
 
                     if (matchingItem.children) {
-                        currentItems = matchingItem.children;
+                        currentItems = matchingItem.children
                     }
                 } else {
                     result.push({
                         title: segment.charAt(0).toUpperCase() + segment.slice(1),
                         path: currentPath
-                    });
+                    })
                 }
             }
 
             return result
-        };
+        }
 
         setBreadcrumbItems(buildBreadcrumbItems())
-    }, [pathname]);
+    }, [pathname])
 
     const antdBreadcrumbItems = breadcrumbItems.map((item, index) => {
         if (index < breadcrumbItems.length - 1) {
@@ -68,5 +68,5 @@ export default function MainBreadcrumb() {
             className={`${mytheme === 'light' ? 'bg-white' : 'bg-neutral-900'} !pl-3 !py-1`}
             items={antdBreadcrumbItems}
         />
-    );
+    )
 }

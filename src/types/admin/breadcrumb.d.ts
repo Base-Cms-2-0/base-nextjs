@@ -4,7 +4,7 @@ interface BreadcrumbItem {
 }
 
 interface MenuItem {
-    key: string;
-    label: string;
+    key: string
+    label: string
     children?: MenuItem[]
 }
