@@ -1,11 +1,24 @@
 'use client';
 
-import React from 'react';
+import { useLocale } from 'next-intl';
+import { usePathname, useRouter } from 'next/navigation';
 import { Form, Input, Button } from 'antd';
 import { MailOutlined } from '@ant-design/icons';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 export default function ForgotPassword() {
+  const t = useTranslations('forgotPassword'); // Hook để lấy nội dung đa ngôn ngữ
+  const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  // Function to switch locale
+  const switchLocale = (newLocale: string) => {
+    const currentPathname = pathname.replace(`/${locale}`, '') || '/';
+    router.push(`/${newLocale}${currentPathname}`);
+  };
+
   return (
     <div className="flex min-h-screen font-roboto">
       <div className="hidden md:flex md:w-1/2 bg-white flex-col items-center justify-center p-8">
@@ -15,10 +28,14 @@ export default function ForgotPassword() {
             alt="Golden Bee Logo"
             className="w-12 h-12"
           />
-          <h2 className="text-2xl font-bold text-gray-800">CỬA HÀNG GAS</h2>
+          <h2 className="text-2xl font-bold text-gray-800">
+            {locale === 'vi' ? 'CỬA HÀNG GAS' : 'GAS STORE'}
+          </h2>
         </div>
         <p className="text-center text-gray-700 text-lg mb-8 max-w-lg">
-          Cung cấp các loại bình gas chất lượng cao, đảm bảo an toàn và chất lượng dịch vụ giao hàng nhanh chóng đến tận nhà.
+          {locale === 'vi'
+            ? 'Cung cấp các loại bình gas chất lượng cao, đảm bảo an toàn và chất lượng dịch vụ giao hàng nhanh chóng đến tận nhà.'
+            : 'Providing high-quality gas cylinders, ensuring safety and fast delivery service right to your door.'}
         </p>
         <img
           src="https://gasdonga.com.vn/images/1741078756097.png"
@@ -39,7 +56,7 @@ export default function ForgotPassword() {
           <div className="w-full">
             <div className="text-center md:mt-0 mt-14 mb-6 md:mb-7">
               <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3 tracking-tight">
-                Quên Mật Khẩu
+                {t('title')}
               </h1>
             </div>
             <Form
@@ -50,17 +67,17 @@ export default function ForgotPassword() {
               requiredMark={false}
             >
               <Form.Item
-                label={<span className="text-gray-700 font-medium">Email</span>}
+                label={<span className="text-gray-700 font-medium">{t('emailLabel')}</span>}
                 name="email"
                 rules={[
-                  { required: true, message: 'Vui lòng nhập email của bạn!' },
-                  { type: 'email', message: 'Email không hợp lệ!' },
+                  { required: true, message: t('emailRequired') },
+                  { type: 'email', message: t('emailInvalid') },
                 ]}
                 className="mb-5"
               >
                 <Input
                   prefix={<MailOutlined className="text-gray-400" />}
-                  placeholder="Nhập email của bạn"
+                  placeholder={t('emailPlaceholder')}
                   className="rounded-md py-2 px-4 text-gray-700"
                 />
               </Form.Item>
@@ -72,7 +89,7 @@ export default function ForgotPassword() {
                   htmlType="submit"
                   className="w-full h-12 mt-1 font-medium tracking-wide"
                 >
-                  Gửi Yêu Cầu
+                  {t('submitButton')}
                 </Button>
               </Form.Item>
 
@@ -81,7 +98,7 @@ export default function ForgotPassword() {
                   href="/auth/login"
                   className="text-sm text-red-600 hover:text-red-800 transition-colors"
                 >
-                  Quay lại Đăng Nhập
+                  {t('backToLogin')}
                 </Link>
               </div>
             </Form>

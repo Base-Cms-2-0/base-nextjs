@@ -1,9 +1,4 @@
-const Page = () => {
-  return (
-    <div>
-      <div>Trang chủ</div>
-    </div>
-  )
+import { redirect } from 'next/navigation';
+export default function Home() {
+  redirect('/vi');
 }
-
-export default Page;
