@@ -1,6 +1,7 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import themeReducer, { ThemeState } from '@/redux/theme/themeSlice'
 import { persistReducer, persistStore, PersistConfig } from 'redux-persist'
+import titleReducer from './features/titleSlice'
 import storage from 'redux-persist/lib/storage'
 
 interface RootState {
@@ -20,7 +21,11 @@ const persistConfig: PersistConfig<RootState> = {
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: {
+    persistedReducer,
+    theme: themeReducer,
+    title: titleReducer,
+  },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
@@ -30,3 +35,4 @@ export const store = configureStore({
 export const persistor = persistStore(store)
 
 export type { RootState }
+export type AppDispatch = typeof store.dispatch
