@@ -7,4 +7,8 @@ export const items: MenuItem[] = [
         key: 'dashboard',
         label: 'Bảng điều khiển',
     },
+    {
+        key: 'post',
+        label: 'Bài viết',
+    },
 ]
