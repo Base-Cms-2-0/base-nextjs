@@ -50,7 +50,7 @@ export default function DashboardLayout({
                 <Layout>
                     <MainHeader collapsed={collapsed} setCollapsed={setCollapsed} />
                     <MainBreadcrumb />
-                    <Content className={`${mytheme === 'light' ? 'bg-white' : 'bg-neutral-900'} m-3 p-2 rounded-md`}>
+                    <Content className={`${mytheme === 'light' ? 'bg-white' : 'bg-neutral-900'} mx-3 p-2 rounded-md`}>
                         {children}
                     </Content>
                 </Layout>
