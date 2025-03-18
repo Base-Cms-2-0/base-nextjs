@@ -1,3 +1,24 @@
 @import "tailwindcss";
 @import 'admin/sidebar';
 @import 'admin/modal';
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+
+@theme static {
+    --color-primary: var(--color-yellow-400);
+    --color-secondary: var(--color-orange-500);
+    --margin-sec: 2.5rem;
+    --padding-cont: 0.5rem;
+    --gap-btn: 0.75rem;
+    --radius-sec: 0.375rem;
+}
+
+@theme dark {
+    --color-primary: var(--color-yellow-300);
+    --color-secondary: var(--color-orange-100);
+    --margin-sec: 2.5rem;
+    --padding-cont: 0.5rem;
+    --gap-btn: 0.75rem;
+    --radius-sec: 0.375rem;
+}

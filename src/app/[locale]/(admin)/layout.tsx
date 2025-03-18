@@ -18,7 +18,12 @@ export default function DashboardLayout({
     const { Content } = Layout
     const [collapsed, setCollapsed] = useState(false)
     const { mytheme } = useSelector((state: RootState) => state.theme)
+    const getCSSVariable = (variable: string) =>
+        getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
     const themeConfig = {
+        token: {
+            colorPrimary: getCSSVariable('--yellow-500') || '#FFC800',
+          },
         algorithm:
             mytheme === 'dark'
                 ? antdTheme.darkAlgorithm
@@ -29,23 +34,24 @@ export default function DashboardLayout({
 
     useEffect(() => {
         setIsClient(true)
-    }, [])
+        document.documentElement.setAttribute('data-theme', mytheme === 'light' ? 'light' : 'dark')
+    }, [mytheme])
 
-    if (!isClient) {
-        return (
-            <div className="h-screen flex flex-col items-center justify-center">
-                <Image
-                    src={IMAGES.Logo}
-                    alt="Logo"
-                    width={150}
-                />
-            </div>
-        )
-    }
+    // if (!isClient) {
+    //     return (
+    //         <div className="h-screen flex flex-col items-center justify-center">
+    //             <Image
+    //                 src={IMAGES.Logo}
+    //                 alt="Logo"
+    //                 width={150}
+    //             />
+    //         </div>
+    //     )
+    // }
 
     return (
         <ConfigProvider theme={themeConfig}>
-            <Layout className={`${mytheme === 'light' ? 'light' : 'dark'} h-screen`}>
+            <Layout className="h-screen">
                 <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
                 <Layout>
                     <MainHeader collapsed={collapsed} setCollapsed={setCollapsed} />
