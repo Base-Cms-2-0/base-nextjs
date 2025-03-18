@@ -19,8 +19,7 @@
     "loginFailedDesc": "Please check your login information",
     "errorTitle": "System Error",
     "errorDesc": "An error occurred, please try again later!",
-    "invalidCredentials": "Incorrect email or password",
-     "login": "login"
+    "invalidCredentials": "Incorrect email or password"
   },
   "forgotPassword": {
     "title": "Forgot Password",
