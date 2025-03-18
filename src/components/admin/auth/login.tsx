@@ -3,12 +3,11 @@
 import { Form, Input, Button } from 'antd'
 import { MailOutlined, LockOutlined } from '@ant-design/icons'
 import { useTranslations } from 'next-intl'
-import { useRouter, usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { useCustomNotification } from '@/components/admin/notification/customNotification'
 import { IMAGES } from '@/constants/admin/theme'
 import Image from 'next/image'
-import Link from 'next/link'
+import { Link, useRouter, usePathname } from "@/i18n/routing"
 import Cookies from 'js-cookie'
 
 export default function Login() {
@@ -16,10 +15,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false)
   const { showNotification, contextHolder } = useCustomNotification()
   const router = useRouter()
-  const pathname = usePathname()
 
-  const langMatch = pathname.match(/^\/([a-z]{2})(\/|$)/)
-  const langPrefix = langMatch ? `/${langMatch[1]}` : ''
 
   const onFinish = async (values: any) => {
     setLoading(true)
@@ -53,7 +49,7 @@ export default function Login() {
         })
 
         setTimeout(() => {
-          router.push(`${langPrefix}/dashboard`)
+          router.push("/dashboard")
         }, 1300)
       } else {
         console.error("Login failed:", result.message)
@@ -176,7 +172,7 @@ export default function Login() {
                   </Form.Item>
 
                   <Link
-                    href={`${langPrefix}/auth/forgotPassword`}
+                    href="/auth/forgotPassword"
                     className="text-sm text-red-600 hover:text-red-800 transition-colors"
                   >
                     {t('forgotPassword')}

@@ -6,19 +6,13 @@ import { Form, Input, Button } from 'antd'
 import { MailOutlined } from '@ant-design/icons'
 import { useTranslations } from 'next-intl'
 import { IMAGES } from '@/constants/admin/theme'
+import { Link } from "@/i18n/routing"
 import Image from 'next/image';
-import Link from 'next/link'
 
 
 export default function ForgotPassword() {
   const t = useTranslations('forgotPassword')
   const locale = useLocale()
-  const router = useRouter()
-  const pathname = usePathname()
-
-  const langMatch = pathname.match(/^\/([a-z]{2})(\/|$)/)
-  const langPrefix = langMatch ? `/${langMatch[1]}` : ''
-
 
   return (
     <div className="flex min-h-screen font-roboto">
@@ -98,7 +92,7 @@ export default function ForgotPassword() {
 
               <div className="text-center mt-4">
                 <Link
-                  href={`${langPrefix}/auth/login`}
+                  href="/auth/login"
                   className="text-sm text-red-600 hover:text-red-800 transition-colors"
                 >
                   {t('backToLogin')}

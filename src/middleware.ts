@@ -1,14 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { routing } from '@/i18n/routing'
 
-const requestLimit = 60
-const timeWindow = 60 * 1000
+const requestLimit = 60;
+const timeWindow = 60 * 1000;
 const requestCounts = new Map<string, { count: number; timestamp: number }>()
 
 export async function middleware(req: NextRequest) {
     const { pathname } = req.nextUrl
 
     const langMatch = pathname.match(/^\/([a-z]{2})(\/|$)/)
-    const langPrefix = langMatch ? `/${langMatch[1]}` : ''
+    const locale = langMatch ? langMatch[1] : routing.defaultLocale
 
     const clientIP = req?.ip ?? req.headers.get('x-forwarded-for') ?? 'unknown'
     console.log('Client IP:', clientIP)
@@ -20,7 +21,7 @@ export async function middleware(req: NextRequest) {
         if (now - requestData.timestamp < timeWindow) {
             if (requestData.count >= requestLimit) {
                 console.log('Request limit exceeded for IP:', clientIP);
-                return NextResponse.redirect(new URL(`${langPrefix}/auth/conflict`, req.url))
+                return NextResponse.redirect(new URL(`/${locale}/auth/conflict`, req.url))
             }
             requestData.count++
         } else {
@@ -32,28 +33,26 @@ export async function middleware(req: NextRequest) {
 
     const token = req.cookies.get('token')?.value
 
-    console.log('Language prefix:', langPrefix)
+    const pathWithoutLang = locale && langMatch ? pathname.substring(`/${locale}`.length) : pathname
 
-    const protectedPaths = ['/dashboard', '/profile', '/api/protected-route'];
+    const protectedPaths = ['/dashboard', '/profile', '/api/protected-route']
     const protectedPatterns = ['/dashboard/', '/profile/', '/api/protected-route/']
-
-    const pathWithoutLang = langPrefix ? pathname.substring(langPrefix.length) : pathname
 
     const isProtected =
         protectedPaths.includes(pathWithoutLang) ||
-        protectedPatterns.some(pattern => pathWithoutLang.startsWith(pattern))
+        protectedPatterns.some((pattern) => pathWithoutLang.startsWith(pattern))
 
     if (pathWithoutLang.startsWith('/auth/login') && token) {
-        return NextResponse.redirect(new URL(`${langPrefix}/dashboard`, req.url))
+        return NextResponse.redirect(new URL(`/${locale}/dashboard`, req.url))
     }
 
     if (isProtected && !token) {
-        const loginUrl = new URL(`${langPrefix}/auth/login`, req.url)
+        const loginUrl = new URL(`/${locale}/auth/login`, req.url)
         return NextResponse.redirect(loginUrl)
     }
 
-    console.log('Proceeding to next middleware/page');
-    return NextResponse.next();
+    console.log('Proceeding to next middleware/page')
+    return NextResponse.next()
 }
 
 export const config = {

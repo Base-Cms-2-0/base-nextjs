@@ -19,8 +19,7 @@
     "loginFailedDesc": "Vui lòng kiểm tra lại thông tin đăng nhập.",
     "errorTitle": "Lỗi hệ thống",
     "errorDesc": "Đã xảy ra lỗi, vui lòng thử lại sau!",
-    "invalidCredentials": "Email hoặc mật khẩu không đúng",
-    "login": "login"
+    "invalidCredentials": "Email hoặc mật khẩu không đúng"
   },
   "forgotPassword": {
     "title": "Quên Mật Khẩu",
