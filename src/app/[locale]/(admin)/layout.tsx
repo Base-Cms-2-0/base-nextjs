@@ -4,7 +4,7 @@ import { Layout, theme as antdTheme, ConfigProvider } from 'antd'
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/redux/store'
-import { ImageStatic } from '@/constants/admin/theme'
+import { IMAGES } from '@/constants/admin/theme'
 import Sidebar from '@/components/admin/layout/sidebar'
 import MainHeader from '@/components/admin/layout/mainHeader'
 import MainBreadcrumb from '@/components/admin/layout/mainBreadcrumb'
@@ -35,7 +35,7 @@ export default function DashboardLayout({
         return (
             <div className="h-screen flex flex-col items-center justify-center">
                 <Image
-                    src={ImageStatic.Logo}
+                    src={IMAGES.Logo}
                     alt="Logo"
                     width={150}
                 />

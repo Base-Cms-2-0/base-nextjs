@@ -5,7 +5,7 @@ import { Layout, Menu } from 'antd'
 import { items } from '@/constants/admin/menu'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/redux/store'
-import { ImageStatic } from '@/constants/admin/theme'
+import { IMAGES } from '@/constants/admin/theme'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
@@ -89,7 +89,7 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
         >
             <div className={`${mytheme === 'light' ? 'bg-white border-neutral-200' : 'bg-neutral-900 border-neutral-700'} p-2 flex border-b items-center justify-between`}>
                 <Image
-                    src={ImageStatic.Logo}
+                    src={IMAGES.Logo}
                     alt="Logo"
                     width={85}
                 />

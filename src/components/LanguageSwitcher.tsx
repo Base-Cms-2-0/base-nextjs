@@ -2,9 +2,11 @@
 
 import { useLocale } from 'next-intl'
 import { usePathname, useRouter } from 'next/navigation'
-import { useState, useEffect } from 'react'
 import { IMAGES } from '@/constants/client/theme'
 import Image from 'next/image'
+import { Tooltip, Switch } from 'antd'
+import { useEffect, useState } from 'react'
+import { FlagOutlined, GlobalOutlined } from '@ant-design/icons'
 
 export default function LanguageSwitcher() {
   const locale = useLocale()
@@ -35,38 +37,31 @@ export default function LanguageSwitcher() {
 
   return (
     <div className="flex justify-end p-4">
-      <label className="relative inline-flex cursor-pointer items-center">
-        <input
-          type="checkbox"
-          checked={isToggled}
-          onChange={handleToggle}
-          className="peer sr-only"
-        />
-        <div
-          className="peer flex h-8 items-center gap-4 rounded-full bg-orange-600 px-4 after:absolute after:left-1 after:h-6 after:w-16 after:rounded-full after:bg-white/40 after:transition-all after:content-[''] peer-checked:bg-red-500  peer-checked:after:translate-x-full peer-focus:outline-none dark:border-slate-600 dark:bg-slate-700 text-sm text-white"
-        >
-          <div className="flex items-center space-x-2">
-            <Image
-              src={languages[0].flag}
-              alt={`${languages[0].name} flag`}
-              width={20}
-              height={20}
-              className="object-contain rounded-full"
-            />
-            <span>{languages[0].name}</span>
-          </div>
-          <div className="flex items-center space-x-2">
+      <Tooltip title="Language">
+        <Switch
+          className="hidden sm:inline"
+          checkedChildren={
             <Image
               src={languages[1].flag}
               alt={`${languages[1].name} flag`}
-              width={20}
-              height={20}
-              className="object-contain rounded-full"
+              width={16}
+              height={16}
+              className=" rounded-full w-5 mt-[1.5px] h-5"
             />
-            <span>{languages[1].name}</span>
-          </div>
-        </div>
-      </label>
+          }
+          unCheckedChildren={
+            <Image
+              src={languages[0].flag}
+              alt={`${languages[0].name} flag`}
+              width={16}
+              height={16}
+            className=" rounded-full w-5 h-5"
+            />
+          }
+          checked={isToggled}
+          onClick={handleToggle}
+        />
+      </Tooltip>
     </div>
   )
 }

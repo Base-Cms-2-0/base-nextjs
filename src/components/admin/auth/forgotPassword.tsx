@@ -5,6 +5,8 @@ import { usePathname, useRouter } from 'next/navigation'
 import { Form, Input, Button } from 'antd'
 import { MailOutlined } from '@ant-design/icons'
 import { useTranslations } from 'next-intl'
+import { IMAGES } from '@/constants/admin/theme'
+import Image from 'next/image';
 import Link from 'next/link'
 
 
@@ -14,19 +16,20 @@ export default function ForgotPassword() {
   const router = useRouter()
   const pathname = usePathname()
 
-  const switchLocale = (newLocale: string) => {
-    const currentPathname = pathname.replace(`/${locale}`, '') || '/'
-    router.push(`/${newLocale}${currentPathname}`)
-  }
+  const langMatch = pathname.match(/^\/([a-z]{2})(\/|$)/)
+  const langPrefix = langMatch ? `/${langMatch[1]}` : ''
+
 
   return (
     <div className="flex min-h-screen font-roboto">
       <div className="hidden md:flex md:w-1/2 bg-white flex-col items-center justify-center p-8">
         <div className="mb-6 flex items-center gap-3">
-          <img
-            src="https://brandlogos.net/wp-content/uploads/2022/07/gasgas-logo_brandlogos.net_eew9a.png"
-            alt="Golden Bee Logo"
-            className="w-12 h-12"
+          <Image
+            src={IMAGES.LogoGas}
+            alt="Logo Gas"
+            width={48}
+            height={48}
+            priority
           />
           <h2 className="text-2xl font-bold text-gray-800">
             {locale === 'vi' ? 'CỬA HÀNG GAS' : 'GAS STORE'}
@@ -37,18 +40,18 @@ export default function ForgotPassword() {
             ? 'Cung cấp các loại bình gas chất lượng cao, đảm bảo an toàn và chất lượng dịch vụ giao hàng nhanh chóng đến tận nhà.'
             : 'Providing high-quality gas cylinders, ensuring safety and fast delivery service right to your door.'}
         </p>
-        <img
-          src="https://gasdonga.com.vn/images/1741078756097.png"
+        <Image
+          src={IMAGES.GaoGas}
           alt="Illustration of people with charts"
+          width={500}
+          height={300}
           className="w-full max-w-2xl object-cover"
         />
       </div>
-
       <div
         className="w-full md:w-1/2 flex items-start md:items-center justify-center bg-cover bg-center bg-no-repeat min-h-[auto] md:min-h-screen relative overflow-hidden"
         style={{
-          backgroundImage:
-            "url('https://media.istockphoto.com/id/1354565720/vector/hexagonal-geometric-seamless-pattern-vector-background-grid-with-editable-strokes.jpg?s=612x612&w=0&k=20&c=YWy1EaFNgqGfc8yUBK9nXN-DhqsNcSxHxXICDeJQC8Q=')",
+          backgroundImage: `url(${IMAGES.Istock})`,
         }}
       >
         <div className="absolute inset-0 bg-white/85"></div>
@@ -95,7 +98,7 @@ export default function ForgotPassword() {
 
               <div className="text-center mt-4">
                 <Link
-                  href="/auth/login"
+                  href={`${langPrefix}/auth/login`}
                   className="text-sm text-red-600 hover:text-red-800 transition-colors"
                 >
                   {t('backToLogin')}

@@ -13,7 +13,14 @@
     "forgotPassword": "Forgot password?",
     "submitButton": "Login",
     "storeTitle": "GAS STORE",
-    "storeDescription": "Providing high-quality gas cylinders, ensuring safety and fast delivery service right to your door."
+    "storeDescription": "Providing high-quality gas cylinders, ensuring safety and fast delivery service right to your door.",
+    "loginSuccessTitle": "Login Successful",
+    "loginFailedTitle": "Login failed. Incorrect email or password.",
+    "loginFailedDesc": "Please check your login information",
+    "errorTitle": "System Error",
+    "errorDesc": "An error occurred, please try again later!",
+    "invalidCredentials": "Incorrect email or password",
+     "login": "login"
   },
   "forgotPassword": {
     "title": "Forgot Password",

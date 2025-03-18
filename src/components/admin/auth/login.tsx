@@ -3,35 +3,105 @@
 import { Form, Input, Button } from 'antd'
 import { MailOutlined, LockOutlined } from '@ant-design/icons'
 import { useTranslations } from 'next-intl'
+import { useRouter, usePathname } from 'next/navigation'
 import { useState } from 'react'
+import { useCustomNotification } from '@/components/admin/notification/customNotification'
+import { IMAGES } from '@/constants/admin/theme'
+import Image from 'next/image'
 import Link from 'next/link'
+import Cookies from 'js-cookie'
 
 export default function Login() {
-  const t = useTranslations('login') 
+  const t = useTranslations('login')
   const [loading, setLoading] = useState(false)
+  const { showNotification, contextHolder } = useCustomNotification()
+  const router = useRouter()
+  const pathname = usePathname()
+
+  const langMatch = pathname.match(/^\/([a-z]{2})(\/|$)/)
+  const langPrefix = langMatch ? `/${langMatch[1]}` : ''
 
   const onFinish = async (values: any) => {
     setLoading(true)
-    setLoading(false)
+    try {
+      const response = await fetch("https://uat-lotus-dreams.goldenbeeltd.top/api/login", {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      })
+
+      const result = await response.json()
+
+      if (result.status === "success") {
+        Cookies.set("token", result.data.access_token, { expires: 1, secure: true, sameSite: 'Strict' })
+
+        if (values.remember) {
+          Cookies.set("user", JSON.stringify(result.data.user), { expires: 7 })
+        } else {
+          Cookies.remove("user")
+        }
+
+        showNotification({
+          message: t('loginSuccessTitle'),
+          showProgress: true,
+          pauseOnHover: true,
+          placement: 'topRight',
+          duration: 3,
+        })
+
+        setTimeout(() => {
+          router.push(`${langPrefix}/dashboard`)
+        }, 1300)
+      } else {
+        console.error("Login failed:", result.message)
+        showNotification({
+          message: t('loginFailedTitle'),
+          showProgress: true,
+          pauseOnHover: true,
+          placement: 'topRight',
+          duration: 3,
+        })
+      }
+    } catch (error) {
+      console.error("Error during login:", error)
+      showNotification({
+        message: t('errorTitle'),
+        showProgress: true,
+        pauseOnHover: true,
+        placement: 'topRight',
+        duration: 3,
+      })
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
+
     <div className="flex min-h-screen font-roboto">
+      {contextHolder}
       <div className="hidden md:flex md:w-1/2 bg-white flex-col items-center justify-center p-8">
         <div className="mb-6 flex items-center gap-3">
-          <img
-            src="https://brandlogos.net/wp-content/uploads/2022/07/gasgas-logo_brandlogos.net_eew9a.png"
-            alt="Golden Bee Logo"
-            className="w-12 h-12"
+          <Image
+            src={IMAGES.LogoGas}
+            alt="Logo Gas"
+            width={48}
+            height={48}
+            priority
           />
           <h2 className="text-2xl font-bold text-gray-800">{t('storeTitle')}</h2>
         </div>
         <p className="text-center text-gray-700 text-lg mb-8 max-w-lg">
           {t('storeDescription')}
         </p>
-        <img
-          src="https://gasdonga.com.vn/images/1741078756097.png"
+        <Image
+          src={IMAGES.GaoGas}
           alt="Illustration of people with charts"
+          width={500}
+          height={300}
           className="w-full max-w-2xl object-cover"
         />
       </div>
@@ -39,8 +109,7 @@ export default function Login() {
       <div
         className="w-full md:w-1/2 flex items-start md:items-center justify-center bg-cover bg-center bg-no-repeat min-h-[auto] md:min-h-screen relative overflow-hidden"
         style={{
-          backgroundImage:
-            "url('https://media.istockphoto.com/id/1354565720/vector/hexagonal-geometric-seamless-pattern-vector-background-grid-with-editable-strokes.jpg?s=612x612&w=0&k=20&c=YWy1EaFNgqGfc8yUBK9nXN-DhqsNcSxHxXICDeJQC8Q=')",
+          backgroundImage: `url(${IMAGES.Istock})`,
         }}
       >
         <div className="absolute inset-0 bg-white/85"></div>
@@ -107,7 +176,7 @@ export default function Login() {
                   </Form.Item>
 
                   <Link
-                    href="/auth/forgotPassword"
+                    href={`${langPrefix}/auth/forgotPassword`}
                     className="text-sm text-red-600 hover:text-red-800 transition-colors"
                   >
                     {t('forgotPassword')}
