@@ -6,8 +6,8 @@ import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { useCustomNotification } from '@/components/admin/notification/customNotification'
 import { IMAGES } from '@/constants/admin/theme'
+import { Link, useRouter } from "@/i18n/routing"
 import Image from 'next/image'
-import { Link, useRouter, usePathname } from "@/i18n/routing"
 import Cookies from 'js-cookie'
 
 export default function Login() {

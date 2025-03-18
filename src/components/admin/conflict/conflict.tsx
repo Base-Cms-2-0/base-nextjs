@@ -5,7 +5,7 @@ import { IMAGES } from '@/constants/admin/theme'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 
-export default function ConflictPage() {
+export default function Conflict() {
   const router = useRouter()
 
   const handleResetLimit = async () => {

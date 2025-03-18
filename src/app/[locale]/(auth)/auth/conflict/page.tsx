@@ -1,8 +1,9 @@
 'use client'
 
-import ConflictPage from "@/components/admin/conflict/conflict"
-export default function Conflict () {
+import Conflict from '@/components/admin/conflict/conflict'
+
+export default function ConflictPage() {
     return (
-        <ConflictPage />
+        <Conflict />
     )
 }

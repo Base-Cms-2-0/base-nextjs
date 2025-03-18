@@ -12,7 +12,7 @@ export default function BreadcrumbWithTitle() {
   const [breadcrumbItems, setBreadcrumbItems] = useState<BreadcrumbItem[]>([])
   const { mytheme } = useSelector((state: RootState) => state.theme)
   const { title: reduxTitle } = useSelector((state: RootState) => state.title)
-  const { Title, Text } = Typography
+  const { Title } = Typography
 
   useEffect(() => {
     const pathSegments = pathname.split('/').filter(Boolean)

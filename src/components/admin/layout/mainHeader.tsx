@@ -1,14 +1,14 @@
 'use client'
 
-import { MoonOutlined, SunOutlined, SettingOutlined, DownOutlined, UserOutlined } from '@ant-design/icons'
-import { Button, Tooltip, Switch, Input, Dropdown, Space, Avatar } from 'antd'
+import { MoonOutlined, SunOutlined} from '@ant-design/icons'
+import { Button, Tooltip, Switch, Input } from 'antd'
 import { HugeiconsIcon } from '@hugeicons/react'
 import { Menu02Icon, Menu01Icon } from '@hugeicons/core-free-icons'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/redux/store'
 import { toggleTheme } from '@/redux/theme/themeSlice'
-import type { GetProps, MenuProps } from 'antd'
-import MainHeaderUser from "@/components/admin/layout/mainHeaderUser";
+import type { GetProps } from 'antd'
+import MainHeaderUser from '@/components/admin/layout/mainHeaderUser';
 type SearchProps = GetProps<typeof Input.Search>
 
 export default function MainHeader({ collapsed, setCollapsed }: MainHeaderProps) {

@@ -1,14 +1,12 @@
 'use client'
 
 import { useLocale } from 'next-intl'
-import { usePathname, useRouter } from 'next/navigation'
 import { Form, Input, Button } from 'antd'
 import { MailOutlined } from '@ant-design/icons'
 import { useTranslations } from 'next-intl'
 import { IMAGES } from '@/constants/admin/theme'
-import { Link } from "@/i18n/routing"
-import Image from 'next/image';
-
+import { Link } from '@/i18n/routing'
+import Image from 'next/image'
 
 export default function ForgotPassword() {
   const t = useTranslations('forgotPassword')

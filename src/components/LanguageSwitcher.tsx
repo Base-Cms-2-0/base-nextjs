@@ -3,10 +3,9 @@
 import { useLocale } from 'next-intl'
 import { usePathname, useRouter } from 'next/navigation'
 import { IMAGES } from '@/constants/client/theme'
-import Image from 'next/image'
 import { Tooltip, Switch } from 'antd'
 import { useEffect, useState } from 'react'
-import { FlagOutlined, GlobalOutlined } from '@ant-design/icons'
+import Image from 'next/image'
 
 export default function LanguageSwitcher() {
   const locale = useLocale()

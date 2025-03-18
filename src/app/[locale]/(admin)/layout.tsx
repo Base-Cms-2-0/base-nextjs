@@ -37,17 +37,17 @@ export default function DashboardLayout({
         document.documentElement.setAttribute('data-theme', mytheme === 'light' ? 'light' : 'dark')
     }, [mytheme])
 
-    // if (!isClient) {
-    //     return (
-    //         <div className="h-screen flex flex-col items-center justify-center">
-    //             <Image
-    //                 src={IMAGES.Logo}
-    //                 alt="Logo"
-    //                 width={150}
-    //             />
-    //         </div>
-    //     )
-    // }
+    if (!isClient) {
+        return (
+            <div className="h-screen flex flex-col items-center justify-center">
+                <Image
+                    src={IMAGES.Logo}
+                    alt="Logo"
+                    width={150}
+                />
+            </div>
+        )
+    }
 
     return (
         <ConfigProvider theme={themeConfig}>

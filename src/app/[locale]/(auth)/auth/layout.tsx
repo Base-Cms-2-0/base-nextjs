@@ -1,6 +1,7 @@
 'use client'
 
 import { Layout } from 'antd'
+
 export default function DashboardLayout({
   children,
 }: {
@@ -8,7 +9,7 @@ export default function DashboardLayout({
 }) {
   return (
     <Layout>
-      <main className="">{children}</main>
+      <main>{children}</main>
     </Layout>
   )
 }
