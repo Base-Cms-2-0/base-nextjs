@@ -2,7 +2,7 @@
 
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 
-export default function Home() {
+export default function MainPage() {
 
   return (
       <LanguageSwitcher />

@@ -6,7 +6,7 @@ import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { useCustomNotification } from '@/components/admin/notification/customNotification'
 import { IMAGES } from '@/constants/admin/theme'
-import { Link, useRouter } from "@/i18n/routing"
+import { Link, useRouter } from '@/i18n/routing'
 import Image from 'next/image'
 import Cookies from 'js-cookie'
 
@@ -15,7 +15,6 @@ export default function Login() {
   const [loading, setLoading] = useState(false)
   const { showNotification, contextHolder } = useCustomNotification()
   const router = useRouter()
-
 
   const onFinish = async (values: any) => {
     setLoading(true)
@@ -60,7 +59,6 @@ export default function Login() {
   }
 
   return (
-
     <div className="flex min-h-screen font-roboto">
       {contextHolder}
       <div className="hidden md:flex md:w-1/2 bg-white flex-col items-center justify-center p-8">
