@@ -86,12 +86,14 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
             collapsed={collapsed}
             onCollapse={(value) => setCollapsed(value)}
             theme='light'
+            className={`${mytheme === 'light' ? 'bg-white border-neutral-200' : 'bg-neutral-900 border-neutral-700'} border-r`}
         >
             <div className={`${mytheme === 'light' ? 'bg-white border-neutral-200' : 'bg-neutral-900 border-neutral-700'} p-2 flex border-b items-center justify-between`}>
                 <Image
                     src={IMAGES.Logo}
                     alt="Logo"
                     width={85}
+                    priority
                 />
             </div>
             <Menu

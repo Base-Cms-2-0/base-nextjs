@@ -81,6 +81,7 @@ export default function Login() {
           width={500}
           height={300}
           className="w-full max-w-2xl object-cover"
+          priority
         />
       </div>
 

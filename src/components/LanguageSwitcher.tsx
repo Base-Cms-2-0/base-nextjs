@@ -11,16 +11,18 @@ export default function LanguageSwitcher() {
   const locale = useLocale()
   const router = useRouter()
   const pathname = usePathname()
+  const [isClient, setIsClient] = useState(false)
 
   const languages = [
     { code: 'en', name: 'EN', flag: IMAGES.flagEn || '/flags/gb.png' },
     { code: 'vi', name: 'VI', flag: IMAGES.flagVi || '/flags/vn.png' },
   ]
 
-  const [isToggled, setIsToggled] = useState(locale === 'vi')
+  const [isToggled, setIsToggled] = useState(false) 
 
   useEffect(() => {
-    setIsToggled(locale === 'vi')
+    setIsClient(true) 
+    setIsToggled(locale === 'vi') 
   }, [locale])
 
   const switchLocale = (newLocale: string) => {
@@ -34,6 +36,10 @@ export default function LanguageSwitcher() {
     switchLocale(newLocale)
   }
 
+  if (!isClient) {
+    return null 
+  }
+
   return (
     <div className="flex justify-end p-4">
       <Tooltip title="Language">
@@ -45,7 +51,8 @@ export default function LanguageSwitcher() {
               alt={`${languages[1].name} flag`}
               width={16}
               height={16}
-              className=" rounded-full w-5 mt-[1.5px] h-5"
+              priority
+              className="rounded-full w-5 mt-[1.5px] h-5"
             />
           }
           unCheckedChildren={
@@ -54,7 +61,8 @@ export default function LanguageSwitcher() {
               alt={`${languages[0].name} flag`}
               width={16}
               height={16}
-            className=" rounded-full w-5 h-5"
+              priority
+              className="rounded-full w-5 h-5"
             />
           }
           checked={isToggled}
