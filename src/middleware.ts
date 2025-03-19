@@ -8,6 +8,12 @@ const requestCounts = new Map<string, { count: number; timestamp: number }>()
 export async function middleware(req: NextRequest) {
     const { pathname } = req.nextUrl
 
+    if (pathname === '/' || !pathname.match(/^\/(en|vi)(\/|$)/)) {
+        const defaultLocale = routing.defaultLocale 
+        const url = new URL(`/${defaultLocale}${pathname === '/' ? '' : pathname}`, req.url)
+        return NextResponse.redirect(url)
+    }
+
     const langMatch = pathname.match(/^\/([a-z]{2})(\/|$)/)
     const locale = langMatch ? langMatch[1] : routing.defaultLocale
 
@@ -65,5 +71,7 @@ export const config = {
         '/:locale(en|vi)/api/protected-route',
         '/:locale(en|vi)/auth/login',
         '/:locale(en|vi)/api/login',
+        '/',
+        '/((?!_next|api|static|public|favicon.ico).*)'
     ],
 }

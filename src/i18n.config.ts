@@ -1,7 +1,7 @@
 import { getRequestConfig } from 'next-intl/server'
 
 export default getRequestConfig(async ({ locale }) => {
-  const safeLocale = locale || 'en'
+  const safeLocale = locale || 'vi'
   
   try {
     return {
@@ -11,8 +11,8 @@ export default getRequestConfig(async ({ locale }) => {
   } catch (error) {
     console.error(`Could not load messages for locale ${safeLocale}`, error)
     return {
-      messages: (await import('./messages/en.json')).default,
-      locale: 'en' 
+      messages: (await import('./messages/vi.json')).default,
+      locale: 'vi' 
     }
   }
 })
