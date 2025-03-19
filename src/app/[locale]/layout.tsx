@@ -2,9 +2,9 @@ import { NextIntlClientProvider } from 'next-intl'
 import { notFound } from 'next/navigation'
 import { StoreProvider } from '@/redux/storeProvider'
 import { Roboto } from 'next/font/google'
+import '@/assets/scss/main.scss'
 import fs from 'fs'
 import path from 'path'
-import '@/assets/scss/main.scss'
 
 const locales = ['en', 'vi']
 

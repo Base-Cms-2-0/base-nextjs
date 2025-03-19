@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '@/redux/store'
 import { toggleTheme } from '@/redux/theme/themeSlice'
 import type { GetProps } from 'antd'
-import MainHeaderUser from '@/components/admin/layout/mainHeaderUser';
+import MainHeaderUser from '@/components/admin/layout/mainHeaderUser'
 type SearchProps = GetProps<typeof Input.Search>
 
 export default function MainHeader({ collapsed, setCollapsed }: MainHeaderProps) {

@@ -20,55 +20,39 @@ export default function Login() {
   const onFinish = async (values: any) => {
     setLoading(true)
     try {
-      const response = await fetch("https://uat-lotus-dreams.goldenbeeltd.top/api/login", {
-        method: "POST",
+      const response = await fetch('https://uat-lotus-dreams.goldenbeeltd.top/api/login', {
+        method: 'POST',
         headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(values),
       })
 
       const result = await response.json()
 
-      if (result.status === "success") {
-        Cookies.set("token", result.data.access_token, { expires: 1, secure: true, sameSite: 'Strict' })
+      if (result.status === 'success') {
+        Cookies.set('token', result.data.access_token, { expires: 1, secure: true, sameSite: 'Strict' })
 
         if (values.remember) {
-          Cookies.set("user", JSON.stringify(result.data.user), { expires: 7 })
+          Cookies.set('user', JSON.stringify(result.data.user), { expires: 7 })
         } else {
-          Cookies.remove("user")
+          Cookies.remove('user')
         }
+        router.push('/dashboard')
 
-        showNotification({
-          message: t('loginSuccessTitle'),
-          showProgress: true,
-          pauseOnHover: true,
-          placement: 'topRight',
-          duration: 3,
-        })
-
-        setTimeout(() => {
-          router.push("/dashboard")
-        }, 1300)
       } else {
-        console.error("Login failed:", result.message)
+        console.error('Login failed:', result.message)
         showNotification({
           message: t('loginFailedTitle'),
           showProgress: true,
-          pauseOnHover: true,
-          placement: 'topRight',
-          duration: 3,
         })
       }
     } catch (error) {
-      console.error("Error during login:", error)
+      console.error('Error during login:', error)
       showNotification({
         message: t('errorTitle'),
         showProgress: true,
-        pauseOnHover: true,
-        placement: 'topRight',
-        duration: 3,
       })
     } finally {
       setLoading(false)

@@ -1,18 +1,18 @@
 'use client'
 
+import React, { useEffect, useState } from 'react'
 import type { MenuProps } from 'antd'
 import { Layout, Menu } from 'antd'
 import { items } from '@/constants/admin/menu'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/redux/store'
 import { IMAGES } from '@/constants/admin/theme'
-import Image from 'next/image'
-import React, { useEffect, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
+import Image from 'next/image'
 
 interface SidebarProps {
-    collapsed: boolean;
-    setCollapsed: (collapsed: boolean) => void;
+    collapsed: boolean
+    setCollapsed: (collapsed: boolean) => void
 }
 
 export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
@@ -27,56 +27,56 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
     useEffect(() => {
         const findKeyByPath = (items: any[]): string | null => {
             for (const item of items) {
-                const itemRoute = item.key;
+                const itemRoute = item.key
                 
-                const parts = pathname.split('/');
-                const pagePath = parts.length >= 3 ? parts[2] : '';
+                const parts = pathname.split('/')
+                const pagePath = parts.length >= 3 ? parts[2] : ''
                 
                 if (pagePath === itemRoute) {
-                    return item.key;
+                    return item.key
                 }
                 
                 if (item.children) {
-                    const key = findKeyByPath(item.children);
-                    if (key) return key;
+                    const key = findKeyByPath(item.children)
+                    if (key) return key
                 }
             }
-            return null;
+            return null
         }
         
-        const activeKey = findKeyByPath(items);
+        const activeKey = findKeyByPath(items)
         
         if (activeKey) {
-            setSelectedKeys([activeKey]);
+            setSelectedKeys([activeKey])
             
             const findParentKey = (items: any[], targetKey: string): string | null => {
                 for (const item of items) {
                     if (item.children && item.children.some((child: any) => child.key === targetKey)) {
-                        return item.key;
+                        return item.key
                     }
                 }
-                return null;
+                return null
             }
             
-            const parentKey = findParentKey(items, activeKey);
+            const parentKey = findParentKey(items, activeKey)
             if (parentKey) {
-                setOpenKeys([parentKey]);
+                setOpenKeys([parentKey])
             }
         }
-    }, [pathname]);
+    }, [pathname])
     
     const onClick: MenuProps['onClick'] = (e) => {
         
-        const locale = pathname.split('/')[1];
+        const locale = pathname.split('/')[1]
         
-        const routePath = `/${locale}/${e.key}`;
-        router.push(routePath);
+        const routePath = `/${locale}/${e.key}`
+        router.push(routePath)
         
-        setSelectedKeys([e.key]);
+        setSelectedKeys([e.key])
     }
     
     const onOpenChange: MenuProps['onOpenChange'] = (keys) => {
-        setOpenKeys(keys as string[]);
+        setOpenKeys(keys as string[])
     }
     
     return (

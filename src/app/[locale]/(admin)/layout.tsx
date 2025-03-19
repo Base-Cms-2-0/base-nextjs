@@ -19,7 +19,7 @@ export default function DashboardLayout({
     const [collapsed, setCollapsed] = useState(false)
     const { mytheme } = useSelector((state: RootState) => state.theme)
     const getCSSVariable = (variable: string) =>
-        getComputedStyle(document.documentElement).getPropertyValue(variable).trim();
+        getComputedStyle(document.documentElement).getPropertyValue(variable).trim()
     const themeConfig = {
         token: {
             colorPrimary: getCSSVariable('--yellow-500') || '#FFC800',

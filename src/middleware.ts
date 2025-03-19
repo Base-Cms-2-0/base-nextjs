@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { routing } from '@/i18n/routing'
 
-const requestLimit = 60;
-const timeWindow = 60 * 1000;
+const requestLimit = 60
+const timeWindow = 60 * 1000
 const requestCounts = new Map<string, { count: number; timestamp: number }>()
 
 export async function middleware(req: NextRequest) {
@@ -18,7 +18,6 @@ export async function middleware(req: NextRequest) {
     const locale = langMatch ? langMatch[1] : routing.defaultLocale
 
     const clientIP = req?.ip ?? req.headers.get('x-forwarded-for') ?? 'unknown'
-    console.log('Client IP:', clientIP)
 
     const now = Date.now()
     const requestData = requestCounts.get(clientIP)
@@ -26,7 +25,6 @@ export async function middleware(req: NextRequest) {
     if (requestData) {
         if (now - requestData.timestamp < timeWindow) {
             if (requestData.count >= requestLimit) {
-                console.log('Request limit exceeded for IP:', clientIP);
                 return NextResponse.redirect(new URL(`/${locale}/auth/conflict`, req.url))
             }
             requestData.count++
@@ -57,7 +55,6 @@ export async function middleware(req: NextRequest) {
         return NextResponse.redirect(loginUrl)
     }
 
-    console.log('Proceeding to next middleware/page')
     return NextResponse.next()
 }
 

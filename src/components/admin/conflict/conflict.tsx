@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import { Result, Button } from 'antd'
 import { IMAGES } from '@/constants/admin/theme'
