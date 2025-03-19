@@ -20,11 +20,14 @@
     "js-cookie": "^3.0.5",
     "next": "15.2.2",
     "next-intl": "^4.0.2",
+    "next-nprogress-bar": "^2.4.7",
+    "nextjs-progressbar": "^0.0.16",
     "rate-limiter-flexible": "^6.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-redux": "^9.2.0",
-    "redux-persist": "^6.0.0"
+    "redux-persist": "^6.0.0",
+    "swr": "^2.3.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

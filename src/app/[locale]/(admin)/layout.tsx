@@ -5,11 +5,14 @@ import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '@/redux/store'
 import { IMAGES } from '@/constants/admin/theme'
+import { motion } from 'framer-motion'
+import { usePathname, useSearchParams } from 'next/navigation'
 import Sidebar from '@/components/admin/layout/sidebar'
 import MainHeader from '@/components/admin/layout/mainHeader'
 import MainBreadcrumb from '@/components/admin/layout/mainBreadcrumb'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 export default function DashboardLayout({
     children,
@@ -21,12 +24,25 @@ export default function DashboardLayout({
     const { mytheme } = useSelector((state: RootState) => state.theme)
     const [isClient, setIsClient] = useState(false)
     const [isLoading, setIsLoading] = useState(true)
+    const pathname = usePathname()
+    const searchParams = useSearchParams()
+
+    useEffect(() => {
+        NProgress.configure({ showSpinner: false })
+    }, [])
+
+    useEffect(() => {
+        NProgress.done()
+        return () => {
+            NProgress.start()
+        }
+    }, [pathname, searchParams])
 
     useEffect(() => {
         setIsClient(true)
         document.documentElement.setAttribute('data-theme', mytheme === 'light' ? 'light' : 'dark')
         const timer = setTimeout(() => setIsLoading(false), 1500)
-        return () => clearTimeout(timer) // Cleanup
+        return () => clearTimeout(timer)
     }, [mytheme])
 
     const getCSSVariable = (variable: string) =>
@@ -46,9 +62,9 @@ export default function DashboardLayout({
             {isLoading && (
                 <motion.div
                     className="fixed inset-0 flex flex-col items-center justify-center z-50"
-                    initial={{ y: 0 }}
-                    animate={{ y: '-100%' }}
-                    transition={{ duration: 1, ease: 'easeInOut', delay: 0.5 }}
+                    initial={{ y: 0, opacity: 1 }}
+                    animate={{ y: '-80%', opacity: 0 }}
+                    transition={{ duration: 1, ease: 'easeInOut', delay: 0.3 }}
                 >
                     <div className="absolute inset-0 flex items-center justify-center bg-primary">
                         <Image

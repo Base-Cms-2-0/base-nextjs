@@ -92,7 +92,7 @@ export default function Sidebar({ collapsed, setCollapsed }: SidebarProps) {
                 <Image
                     src={IMAGES.Logo}
                     alt="Logo"
-                    width={85}
+                    height={32}
                     priority
                 />
             </div>
