@@ -1,6 +1,6 @@
 'use client'
 
-import LanguageSwitcher from '@/components/LanguageSwitcher'
+import LanguageSwitcher from '@/components/languageSwitcher'
 
 export default function MainPage() {
 

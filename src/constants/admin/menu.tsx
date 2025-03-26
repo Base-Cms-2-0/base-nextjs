@@ -4,11 +4,11 @@ type MenuItem = Required<MenuProps>['items'][number]
 
 export const items: MenuItem[] = [
     {
-        key: 'dashboard',
+        key: 'admin/dashboard',
         label: 'Bảng điều khiển',
     },
     {
-        key: 'post',
+        key: 'admin/post',
         label: 'Bài viết',
     },
 ]

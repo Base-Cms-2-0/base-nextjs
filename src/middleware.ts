@@ -17,7 +17,7 @@ export async function middleware(req: NextRequest) {
     const langMatch = pathname.match(/^\/([a-z]{2})(\/|$)/)
     const locale = langMatch ? langMatch[1] : routing.defaultLocale
 
-    const clientIP = req?.ip ?? req.headers.get('x-forwarded-for') ?? 'unknown'
+    const clientIP = req.headers.get('x-forwarded-for') ?? 'unknown'
 
     const now = Date.now()
     const requestData = requestCounts.get(clientIP)
@@ -39,15 +39,15 @@ export async function middleware(req: NextRequest) {
 
     const pathWithoutLang = locale && langMatch ? pathname.substring(`/${locale}`.length) : pathname
 
-    const protectedPaths = ['/dashboard', '/profile', '/api/protected-route']
-    const protectedPatterns = ['/dashboard/', '/profile/', '/api/protected-route/']
+    const protectedPaths = ['/admin', '/profile', '/api/protected-route']
+    const protectedPatterns = ['/admin/', '/profile/', '/api/protected-route/']
 
     const isProtected =
         protectedPaths.includes(pathWithoutLang) ||
         protectedPatterns.some((pattern) => pathWithoutLang.startsWith(pattern))
 
     if (pathWithoutLang.startsWith('/auth/login') && token) {
-        return NextResponse.redirect(new URL(`/${locale}/dashboard`, req.url))
+        return NextResponse.redirect(new URL(`/${locale}/admin/dashboard`, req.url))
     }
 
     if (isProtected && !token) {

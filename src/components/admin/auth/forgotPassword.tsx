@@ -6,11 +6,21 @@ import { MailOutlined } from '@ant-design/icons'
 import { useTranslations } from 'next-intl'
 import { IMAGES } from '@/constants/admin/theme'
 import { Link } from '@/i18n/routing'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
 export default function ForgotPassword() {
   const t = useTranslations('forgotPassword')
   const locale = useLocale()
+  const [isMounted, setIsMounted] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+
+  if (!isMounted) return null
 
   return (
     <div className="flex min-h-screen font-roboto">
@@ -21,7 +31,7 @@ export default function ForgotPassword() {
             alt="Logo Gas"
             width={48}
             height={48}
-            priority
+            priority // Giữ priority cho logo nhỏ
           />
           <h2 className="text-2xl font-bold text-gray-800">
             {locale === 'vi' ? 'CỬA HÀNG GAS' : 'GAS STORE'}
@@ -38,25 +48,25 @@ export default function ForgotPassword() {
           width={500}
           height={300}
           className="w-full max-w-2xl object-cover"
+          // Không dùng priority để tối ưu tải
         />
       </div>
+
       <div
-        className="w-full md:w-1/2 flex items-start md:items-center justify-center bg-cover bg-center bg-no-repeat min-h-[auto] md:min-h-screen relative overflow-hidden"
-        style={{
-          backgroundImage: `url(${IMAGES.Istock})`,
-        }}
+        className="w-full md:w-1/2 -mt-56 flex items-center justify-center min-h-screen relative"
+        style={{ backgroundImage: `url(${IMAGES.Istock})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
       >
         <div className="absolute inset-0 bg-white/85"></div>
-        <div className="w-full max-w-md mt-4 md:mt-0 lg:-mt-32 p-6 md:p-0 flex flex-col items-center justify-start md:justify-center z-10">
+        <div className="w-full max-w-md p-6 flex flex-col items-center justify-center z-10">
           <div className="w-full">
-            <div className="text-center md:mt-0 mt-14 mb-6 md:mb-7">
+            <div className="text-center mb-6">
               <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3 tracking-tight">
                 {t('title')}
               </h1>
             </div>
             <Form
               name="forgot_password"
-              className="w-full"
+              style={{ maxWidth: 600 }} 
               layout="vertical"
               size="large"
               requiredMark={false}
@@ -82,7 +92,8 @@ export default function ForgotPassword() {
                   type="primary"
                   danger
                   htmlType="submit"
-                  className="w-full h-12 mt-1 font-medium tracking-wide"
+                  className="w-full h-12 font-medium tracking-wide"
+                  loading={loading} 
                 >
                   {t('submitButton')}
                 </Button>
